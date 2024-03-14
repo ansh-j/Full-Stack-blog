@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     gap: 50px;
+    
 }
 
 .imageContainer
@@ -35,6 +36,8 @@
 {
     color: red;
     font-weight: 500;
+    text-transform: capitalize;
+
 }
 
 .desc

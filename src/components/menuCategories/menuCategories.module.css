@@ -14,32 +14,32 @@
     font-size: 14px;   
 }
 
-.travel
+.style
 {
-    background-color: #ff795736;
-}
-
-.culture
-{
-    background-color:  #ffb04f45;
-}
-
-.food
-{
-    background-color: #7fb88133;
+    background-color:#57c4ff31 ;
 }
 
 .fashion
 {
-    background-color: #da85c731;
+    background-color:#da85c731;
+}
+
+.food
+{
+    background-color:#7fb88133 ;
+}
+
+.travel
+{
+    background-color:#ff795736 ;
+}
+
+.culture
+{
+    background-color:#ffb04f45
 }
 
 .coding
 {
-    background-color: #5e4fff31;
-}
-
-.style
-{
-    background-color: #57c4ff31;
+    background-color:#5e4fff31 ;
 }
