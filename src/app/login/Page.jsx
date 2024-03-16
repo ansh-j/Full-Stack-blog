@@ -2,9 +2,9 @@
 
 import { signIn, useSession } from "next-auth/react";
 import styles from "./loginPage.module.css";
-import { useRouter} from "next/navigation";
+import { useRouter} from 'next/navigation';
 
-const loginPage = () => {
+const LoginPage = () => {
   const {status} = useSession();
   const router = useRouter();
 
@@ -32,4 +32,4 @@ const loginPage = () => {
   );
 };
 
-export default loginPage;
+export default LoginPage;

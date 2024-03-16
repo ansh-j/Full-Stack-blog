@@ -16,7 +16,7 @@ import { app } from "@/utils/firebase";
 
 const storage = getStorage(app);
 
-const writePage = () => {
+const WritePage = () => {
   const { status } = useSession();
 
   const [open, setOpen] = useState(false);
@@ -159,4 +159,4 @@ const writePage = () => {
   );
 };
 
-export default writePage;
+export default WritePage;
