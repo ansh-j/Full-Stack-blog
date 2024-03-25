@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./writePage.module.css";
 import { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import { useSession } from "next-auth/react";
 import {
@@ -13,21 +13,26 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
-const storage = getStorage(app);
 
 const WritePage = () => {
+  const Router = useRouter()
   const { status } = useSession();
-
+  const ReactQuill=dynamic(()=>import('react-quill'),{ssr:false});
+  
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [file, setFile] = useState(null);
   const [media, setMedia] = useState("");
   const [title, setTitle] = useState("");
-
+  
   useEffect(() => {
+    const storage = getStorage(app);
     const upload = () => {
-      const name = new Date().getTime + file.name;
+      
+      const name = new Date().getTime() + file.name;
       const storageRef = ref(storage, name);
 
       const uploadTask = uploadBytesResumable(storageRef, file);
@@ -48,7 +53,7 @@ const WritePage = () => {
           }
         },
         (error) => {
-          // Handle unsuccessful uploads
+          console.log(error)
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -65,7 +70,7 @@ const WritePage = () => {
     return <div className={styles.loading}>Loading...</div>;
   }
   if (status === "unauthenticated") {
-    router.push("/");
+    Router.push("/");
   }
 
   const slugify = (str) =>
@@ -86,7 +91,7 @@ const WritePage = () => {
         slug:slugify(title),
         catSlug:"travel",
       }),
-    });
+    }); 
 
     console.log(res)
   };
