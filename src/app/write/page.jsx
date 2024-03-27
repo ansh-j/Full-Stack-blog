@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 const Quill = dynamic(() => import("react-quill"), { ssr: false });
 
 const WritePage = () => {
-  const Router = useRouter();
+  const router = useRouter();
   const { status } = useSession();
 
   const [open, setOpen] = useState(false);
@@ -72,7 +72,7 @@ const WritePage = () => {
     return <div className={styles.loading}>Loading...</div>;
   }
   if (status === "unauthenticated") {
-    Router.push("/");
+    router.push("/");
   }
 
   const slugify = (str) =>
@@ -96,7 +96,10 @@ const WritePage = () => {
     });
 
     console.log(res);
-    Router.refresh();
+    setFile(null);
+    setTitle("");
+    setValue("");
+    
   };
 
   return (
@@ -105,6 +108,7 @@ const WritePage = () => {
         type="text"
         placeholder="Title"
         className={styles.input}
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <select

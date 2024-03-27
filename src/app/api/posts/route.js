@@ -15,8 +15,12 @@ export const GET = async (req) => {
         take: POST_PER_PAGE,
         skip: POST_PER_PAGE * (page - 1),
         where: {
-            ...(cat && { catSlug: cat }),
+            ...(cat && { catSlug: cat })
         },
+
+        "orderBy": [{ "createdAt": "desc" }]
+
+        
     }
 
     try {
@@ -42,18 +46,17 @@ export const POST = async (req) => {
 
     const session = await getAuthSession()
 
-    if(!session)
-    {
+    if (!session) {
         return new NextResponse(JSON.stringify({ message: "Not Authenticated!" }, { status: 401 }))
     }
 
-    try{
+    try {
         const body = await req.json();
         const post = await prisma.post.create({
-          data:{...body,userEmail:session.user.email}
+            data: { ...body, userEmail: session.user.email }
         })
         console.log(post)
-        return new NextResponse(JSON.stringify( post, { status: 200 }))
+        return new NextResponse(JSON.stringify(post, { status: 200 }))
 
     } catch (err) {
 
