@@ -37,6 +37,7 @@ const Comments = ({ postSlug }) => {
       body:JSON.stringify({desc,postSlug})
     });
     mutate()
+    setDesc("")
   }
 
   return (
@@ -47,6 +48,7 @@ const Comments = ({ postSlug }) => {
           <textarea
             placeholder="write a comment..."
             className={styles.input}
+            value={desc}
             onChange={(e) => setDesc(e.target.value)}
           />
           <button className={styles.button} onClick={handleSubmit}>Send</button>

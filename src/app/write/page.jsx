@@ -16,23 +16,25 @@ import { app } from "@/utils/firebase";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 
+const Quill = dynamic(() => import("react-quill"), { ssr: false });
 
 const WritePage = () => {
-  const Router = useRouter()
+  const Router = useRouter();
   const { status } = useSession();
-  const ReactQuill=dynamic(()=>import('react-quill'),{ssr:false});
-  
+
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [file, setFile] = useState(null);
   const [media, setMedia] = useState("");
   const [title, setTitle] = useState("");
-  
+  const [catSlug, setCatSlug] = useState("");
+
   useEffect(() => {
     const storage = getStorage(app);
+
     const upload = () => {
-      
-      const name = new Date().getTime() + file.name;
+      const date = new Date();
+      const name = date.getTime() + file.name;
       const storageRef = ref(storage, name);
 
       const uploadTask = uploadBytesResumable(storageRef, file);
@@ -53,7 +55,7 @@ const WritePage = () => {
           }
         },
         (error) => {
-          console.log(error)
+          console.log(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -88,12 +90,13 @@ const WritePage = () => {
         title,
         desc: value,
         img: media,
-        slug:slugify(title),
-        catSlug:"travel",
+        slug: slugify(title),
+        catSlug: catSlug || "style",
       }),
-    }); 
+    });
 
-    console.log(res)
+    console.log(res);
+    Router.refresh();
   };
 
   return (
@@ -104,6 +107,17 @@ const WritePage = () => {
         className={styles.input}
         onChange={(e) => setTitle(e.target.value)}
       />
+      <select
+        className={styles.select}
+        onChange={(e) => setCatSlug(e.target.value)}
+      >
+        <option value="style">style</option>
+        <option value="fashion">fashion</option>
+        <option value="food">food</option>
+        <option value="culture">culture</option>
+        <option value="travel">travel</option>
+        <option value="coding">coding</option>
+      </select>
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>
           <Image src="/plus.png" alt="" height={16} width={16} />
@@ -148,11 +162,11 @@ const WritePage = () => {
             </button>
           </div>
         )}
-        <ReactQuill
+        <Quill
           className={styles.textArea}
           theme="bubble"
           value={value}
-          onChange={setValue}
+          onChange={(e) => setValue(e)}
           placeholder="Tell your story "
         />
       </div>

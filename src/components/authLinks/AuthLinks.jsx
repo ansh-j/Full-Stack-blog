@@ -26,7 +26,7 @@ const AuthLinks = () => {
       </div>
 
       {open && (
-        <div className={styles.responsiveMenu}>
+        <div className={styles.responsiveMenu} onClick={()=>setOpen(!open)}>
           <Link href="/">Homepage</Link>
           <Link href="/">About</Link>
           <Link href="/">Contact</Link>

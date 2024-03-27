@@ -51,6 +51,7 @@
     outline: none;
     background-color: transparent;
     color: var(--textColor);
+    max-width: 100%;
 }
 
 .input::placeholder
@@ -61,13 +62,14 @@
 .textArea
 {
     width: 100%;
+
 }
 
 .publish
 {
     position: absolute;
-    top: 30px;
-    right: 20px;
+    top: 80px;
+    right:50px;
     margin-left: 50px;
     width: 100px;
     padding: 10px 20px;
