@@ -5,7 +5,7 @@ import Comments from "@/components/comments/Comments";
 
 const getData = async (slug) => {
   const res = await fetch(
-    `${process.env.NAME_OF_YOUR_ENV_VARIABLE}/api/posts/${slug}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${slug}`,
     {
       cache: "no-store",
     }
