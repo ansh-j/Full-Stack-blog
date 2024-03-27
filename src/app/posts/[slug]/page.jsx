@@ -5,7 +5,7 @@ import Comments from "@/components/comments/Comments";
 
 const getData = async (slug) => {
   const res = await fetch(
-    `http://localhost:3000/api/posts/${slug}`,
+    `${process.env.NAME_OF_YOUR_ENV_VARIABLE}/api/posts/${slug}`,
     {
       cache: "no-store",
     }
