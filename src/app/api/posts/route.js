@@ -41,7 +41,7 @@ export const GET = async (req) => {
     }
 }
 
-// CEATE A POST
+// CEATE A POSTT
 export const POST = async (req) => {
 
     const session = await getAuthSession()
