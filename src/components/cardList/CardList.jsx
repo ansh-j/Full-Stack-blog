@@ -5,7 +5,7 @@ import Card from "../card/Card";
 
 const getData = async (page, cat) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/posts?page=${page}&cat=${cat || ""}`,
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/posts?page=${page}&cat=${cat || ""}`,
     {
       cache: "no-store",
     }
@@ -15,8 +15,10 @@ const getData = async (page, cat) => {
     throw new Error("Failed");
   }
 
+
   return res.json();
 };
+
 
 const CardList = async ({ page, cat }) => {
   const { posts, count } = await getData(page, cat);
