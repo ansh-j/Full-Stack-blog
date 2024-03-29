@@ -1,6 +1,6 @@
 "use client"
 
-import { signIn, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth~/react";
 import styles from "./loginPage.module.css";
 import { useRouter} from 'next/navigation';
 
