@@ -15,6 +15,7 @@ import {
 import { app } from "@/utils/firebase";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
+import Parser from "html-react-parser";
 
 const Quill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -88,14 +89,14 @@ const WritePage = () => {
       method: "POST",
       body: JSON.stringify({
         title,
-        desc: value,
+        desc: Parser(value).props.children,
         img: media,
         slug: slugify(title),
         catSlug: catSlug || "style",
       }),
     });
 
-    console.log(res);
+    console.log(Parser(value).props.children);
     setFile(null);
     setTitle("");
     setValue("");
@@ -167,6 +168,7 @@ const WritePage = () => {
           </div>
         )}
         <Quill
+         
           className={styles.textArea}
           theme="bubble"
           value={value}
